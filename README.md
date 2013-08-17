@@ -1,6 +1,6 @@
-gpx-fixer is a simple utility for fixing gpx files.
+gpxfixer is a simple utility for fixing gpx files.
 
-	usage: gpx-fixer.py [-h] {strip,copy} ...
+	usage: gpxfixer.py [-h] {strip,copy} ...
 
 	optional arguments:
 	  -h, --help    show this help message and exit
@@ -12,7 +12,7 @@ gpx-fixer is a simple utility for fixing gpx files.
 
 Currently, two commands are supported, 'strip':
 
-	usage: gpx-fixer.py strip [-h] [-s STARTTIME] [-e ENDTIME] [nodes]
+	usage: gpxfixer.py strip [-h] [-s STARTTIME] [-e ENDTIME] [nodes]
 
 	positional arguments:
 	  nodes                 A list of nodes to be removed in a simple XPath format
@@ -22,18 +22,16 @@ Currently, two commands are supported, 'strip':
 
 	optional arguments:
 	  -h, --help            show this help message and exit
-	  -s STARTTIME, --starttime STARTTIME
-		                The timestamp to start stripping nodes from, in
+	  -s STARTTIME		The timestamp to start stripping nodes from, in
 		                ISO8601 format. Omit this argument to have no lower
 		                bounds.
-	  -e ENDTIME, --endtime ENDTIME
-		                The timestamp to finish stripping nodes from, in
+	  -e ENDTIME		The timestamp to finish stripping nodes from, in
 		                ISO8601 format. Omit this argument to have no upper
 		                bounds.
 
 and 'copy':
 
-	usage: gpx-fixer.py copy [-h] [-s STARTTIME] [-e ENDTIME] file [node]
+	usage: gpxfixer.py copy [-h] [-s STARTTIME] [-e ENDTIME] file [node]
 
 	positional arguments:
 	  file                  The path to the GPX file to copy data from.
@@ -42,11 +40,9 @@ and 'copy':
 
 	optional arguments:
 	  -h, --help            show this help message and exit
-	  -s STARTTIME, --starttime STARTTIME
-		                The timestamp to start copying nodes from, in ISO8601
+	  -s STARTTIME          The timestamp to start copying nodes from, in ISO8601
 		                format. Omit this argument to have no lower bounds.
-	  -e ENDTIME, --endtime ENDTIME
-		                The timestamp to finish copying nodes from, in ISO8601
+	  -e ENDTIME            The timestamp to finish copying nodes from, in ISO8601
 		                format. Omit this argument to have no upper bounds.
 
 
@@ -56,20 +52,20 @@ Examples:
 
 1) To strip all location data from dirty.gpx:
 
-	cat dirty.gpx | python gpx-fixer.py strip 
+	cat dirty.gpx | python gpxfixer.py strip 
 
 2) To strip all elevation data from dirty.gpx:
 
-	cat dirty.gpx | python gpx-fixer.py strip "['ele']"
+	cat dirty.gpx | python gpxfixer.py strip "['ele']"
 
 2) To strip location data from dirty.gpx from 'trkpt's recorded before 12:32.15pm on Jan 12, 2013:
 
-	cat dirty.gpx | python gpx-fixer.py strip -e 2013-01-12T12:30:15Z
+	cat dirty.gpx | python gpxfixer.py strip -e 2013-01-12T12:30:15Z
 
 3) To copy all 'trkpt' data from a clean GPX file named clean.gpx and merge it with dirty.gpx:
 
-	cat dirty.gpx | python gpx-fixer.py copy clean.gpx
+	cat dirty.gpx | python gpxfixer.py copy clean.gpx
 
 4) To strip location data from dirty.gpx and copy 'trkpt' data from clean.gpx, all between 12:32.15pm and 12:45.00pm on Jan 12, 2013:
 
-	cat dirty.gpx | python gpx-fixer.py strip -s 2013-01-12T12:30:15Z -e 2013-01-12T12:45:00Z | python gpx-fixer.py copy -s 2013-01-12T12:30:15Z -e 2013-01-12T12:45:00Z clean.gpx
+	cat dirty.gpx | python gpxfixer.py strip -s 2013-01-12T12:30:15Z -e 2013-01-12T12:45:00Z | python gpxfixer.py copy -s 2013-01-12T12:30:15Z -e 2013-01-12T12:45:00Z clean.gpx
